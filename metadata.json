@@ -1,0 +1,6 @@
+{
+  "name": "Salim Number Identity",
+  "description": "Manual phone number identity lookup from legitimate contacts, local records, and public directories.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
