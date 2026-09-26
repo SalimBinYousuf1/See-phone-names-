@@ -60,6 +60,14 @@ object ConfidenceCalculator {
                     isVerified = result.isVerified
                 )
             }
+            result.sourceType == LookupSourceType.GLOBAL_DIRECTORY_INTELLIGENCE -> {
+                ConfidenceBadgeInfo(
+                    label = if (result.isVerified) "Verified Global ID" else "Global Directory ID",
+                    textColor = if (result.isVerified) SalimGreen else SalimBlue,
+                    containerColor = if (result.isVerified) Color(0xFFEBF9EE) else Color(0xFFEBF4FF),
+                    isVerified = result.isVerified
+                )
+            }
             else -> {
                 ConfidenceBadgeInfo(
                     label = "Unverified",

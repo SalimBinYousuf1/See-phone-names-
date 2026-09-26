@@ -3,6 +3,7 @@ package com.example.data.repository
 import com.example.data.model.NormalizedPhoneNumber
 import com.example.lookup.CommunityDirectoryProvider
 import com.example.lookup.ContactsProvider
+import com.example.lookup.GlobalDirectoryIntelligenceProvider
 import com.example.lookup.IdentityResolver
 import com.example.lookup.LicensedProvider
 import com.example.lookup.LocalDirectoryProvider
@@ -19,6 +20,7 @@ class NumberIdentityRepository(
     private val publicBusinessDirectoryProvider: PublicBusinessDirectoryProvider,
     private val communityDirectoryProvider: CommunityDirectoryProvider,
     private val licensedProvider: LicensedProvider,
+    private val globalDirectoryProvider: GlobalDirectoryIntelligenceProvider,
     private val historyRepository: LookupHistoryRepository,
     private val settingsRepository: SettingsRepository
 ) {
@@ -55,6 +57,9 @@ class NumberIdentityRepository(
             activeProviders.add(licensedProvider)
         }
 
+        // 6. Global Directory Intelligence (Truecaller-like indefinite live directory resolver)
+        activeProviders.add(globalDirectoryProvider)
+
         val resolver = IdentityResolver(activeProviders)
         val merged = resolver.resolve(normalizedNumber)
 
@@ -85,7 +90,5 @@ class NumberIdentityRepository(
                 isPossible = false
             )
         )
-        // Dao clear
-        // We will call clearAll on localDirectoryRepository and historyRepository
     }
 }

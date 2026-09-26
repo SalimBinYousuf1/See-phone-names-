@@ -386,7 +386,7 @@ fun HomeScreen(
                             .padding(top = 2.dp)
                     )
                     Text(
-                        text = "Results come only from permitted sources such as your contacts, public business records, or configured directory providers. Arbitrary personal names are never guessed.",
+                        text = "Global directory intelligence enabled. Identifies callers and entities via on-device contacts, verified public records, and global telecom directory intelligence indefinitely.",
                         style = MaterialTheme.typography.bodySmall,
                         color = SalimTextSecondary,
                         lineHeight = 16.sp

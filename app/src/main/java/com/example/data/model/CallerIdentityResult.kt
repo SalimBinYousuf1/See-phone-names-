@@ -6,6 +6,7 @@ enum class IdentityType {
     USER_SAVED,
     COMMUNITY_SUBMISSION,
     EXTERNAL_DIRECTORY,
+    GLOBAL_INTELLIGENCE,
     UNKNOWN
 }
 
@@ -23,6 +24,7 @@ enum class LookupSourceType {
     PUBLIC_BUSINESS_DIRECTORY,
     COMMUNITY_DIRECTORY,
     LICENSED_PROVIDER,
+    GLOBAL_DIRECTORY_INTELLIGENCE,
     NONE
 }
 
@@ -49,5 +51,6 @@ data class CallerIdentityResult(
     val notes: String? = null,
     val category: String? = null,
     val address: String? = null,
-    val website: String? = null
+    val website: String? = null,
+    val spamRiskLevel: String? = null
 )

@@ -114,4 +114,16 @@ class PhoneNumberNormalizerTest {
         assertNotNull(merged.conflictExplanation)
         assertEquals(match1.displayName, merged.primaryResult.displayName)
     }
+
+    @Test
+    fun globalDirectoryEngine_resolvesIndefinitely() {
+        val normalized = normalizer.normalize("+12125550198", "US").getOrThrow()
+        val result = com.example.lookup.GlobalTelecomDirectoryEngine.resolveNumber(normalized)
+        assertNotNull(result.displayName)
+        assertTrue(result.displayName!!.isNotBlank())
+        assertEquals("+12125550198", result.normalizedNumber)
+        assertNotNull(result.carrier)
+        assertNotNull(result.region)
+        assertEquals(LookupSourceType.GLOBAL_DIRECTORY_INTELLIGENCE, result.sourceType)
+    }
 }

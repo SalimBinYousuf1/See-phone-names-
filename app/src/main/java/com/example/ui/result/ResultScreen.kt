@@ -200,6 +200,48 @@ fun ResultScreen(
 
                         ConfidenceBadge(result = primary)
 
+                        if (primary.carrier != null || primary.spamRiskLevel != null) {
+                            Spacer(modifier = Modifier.height(10.dp))
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                primary.carrier?.let { carrierName ->
+                                    Surface(
+                                        shape = RoundedCornerShape(8.dp),
+                                        color = Color.White,
+                                        border = androidx.compose.foundation.BorderStroke(1.dp, SalimCardBorder)
+                                    ) {
+                                        Text(
+                                            text = "📡 $carrierName",
+                                            style = MaterialTheme.typography.labelSmall,
+                                            color = SalimTextPrimary,
+                                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                                        )
+                                    }
+                                }
+
+                                primary.spamRiskLevel?.let { risk ->
+                                    val (riskText, riskBg, riskColor) = when (risk.uppercase()) {
+                                        "HIGH" -> Triple("⚠️ High Spam Risk", Color(0xFFFFECEB), SalimRed)
+                                        "MEDIUM" -> Triple("⚠️ Potential Spam", Color(0xFFFFF4E5), SalimOrange)
+                                        else -> Triple("🛡️ Verified Safe", Color(0xFFEBF9EE), SalimGreen)
+                                    }
+                                    Surface(
+                                        shape = RoundedCornerShape(8.dp),
+                                        color = riskBg
+                                    ) {
+                                        Text(
+                                            text = riskText,
+                                            style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
+                                            color = riskColor,
+                                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                                        )
+                                    }
+                                }
+                            }
+                        }
+
                         Spacer(modifier = Modifier.height(20.dp))
 
                         // Action buttons row
@@ -439,6 +481,7 @@ fun ResultScreen(
                                 LookupSourceType.PUBLIC_BUSINESS_DIRECTORY -> "Official Public Business Registry"
                                 LookupSourceType.COMMUNITY_DIRECTORY -> "Consented Community Submission"
                                 LookupSourceType.LICENSED_PROVIDER -> "Authorized Licensed Directory Gateway"
+                                LookupSourceType.GLOBAL_DIRECTORY_INTELLIGENCE -> "Global Directory Intelligence (Live Telecom Resolver)"
                                 LookupSourceType.NONE -> "No Verified Source"
                             }
                         )

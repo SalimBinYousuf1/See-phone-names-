@@ -50,7 +50,8 @@ object ResultMerger {
                 LookupSourceType.PUBLIC_BUSINESS_DIRECTORY -> 3
                 LookupSourceType.COMMUNITY_DIRECTORY -> 4
                 LookupSourceType.LICENSED_PROVIDER -> 5
-                LookupSourceType.NONE -> 6
+                LookupSourceType.GLOBAL_DIRECTORY_INTELLIGENCE -> 6
+                LookupSourceType.NONE -> 7
             }
         }
 

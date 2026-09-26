@@ -13,6 +13,7 @@ import com.example.domain.usecase.NormalizePhoneNumberUseCase
 import com.example.domain.usecase.SaveNumberIdentityUseCase
 import com.example.lookup.CommunityDirectoryProvider
 import com.example.lookup.ContactsProvider
+import com.example.lookup.GlobalDirectoryIntelligenceProvider
 import com.example.lookup.LicensedProvider
 import com.example.lookup.LocalDirectoryProvider
 import com.example.lookup.PublicBusinessDirectoryProvider
@@ -89,6 +90,10 @@ class DefaultAppContainer(private val application: Application) : AppContainer {
         LicensedProvider()
     }
 
+    private val globalDirectoryProvider: GlobalDirectoryIntelligenceProvider by lazy {
+        GlobalDirectoryIntelligenceProvider()
+    }
+
     override val numberIdentityRepository: NumberIdentityRepository by lazy {
         NumberIdentityRepository(
             normalizer = normalizer,
@@ -97,6 +102,7 @@ class DefaultAppContainer(private val application: Application) : AppContainer {
             publicBusinessDirectoryProvider = publicBusinessDirectoryProvider,
             communityDirectoryProvider = communityDirectoryProvider,
             licensedProvider = licensedProvider,
+            globalDirectoryProvider = globalDirectoryProvider,
             historyRepository = historyRepository,
             settingsRepository = settingsRepository
         )
